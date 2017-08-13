@@ -3,16 +3,14 @@ import PostWrap from './components/PostWrap';
 import CreatePost from './components/CreatePost';
 import Header from './components/Header';
 import { characterCountdown, checkIfEmpty } from './helperFunctions';
+import { css } from 'glamor';
 
-const styles = {
-  container: {
-    height: 'auto',
-    width: '640px',
-    margin: '0 auto',
-    border: '1px solid black',
-    backgroundColor: 'white'
-  },
-};
+let appStyle = css({
+  height: 'auto',
+  width: '500px',
+  margin: '0 auto',
+  backgroundColor: 'white'
+})
 
 class App extends Component {
   constructor(props) {
@@ -110,7 +108,7 @@ class App extends Component {
     }).reverse();
 
     return (
-      <div style={styles.container}>
+      <div {...appStyle}>
         <Header updateFeed={this.updateFeed} />
         <CreatePost
           onChange={this.draftPost}

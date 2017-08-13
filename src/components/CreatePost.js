@@ -1,46 +1,43 @@
 import React from 'react';
+import { css } from 'glamor';
 
-const styles = {
-  create: {
-    height: '80px',
-    width: '60%',
-    margin: '10px auto',
-    border: '1px solid grey',
-    padding: '10px',
-    display: 'flex',
-    alignContent: 'flex-end',
-  },
-  text: {
-    height: '100%',
-    width: '80%',
-    lineHeight: '100%',
-    fontSize: '22px',
-    border: 'none',
-    outline: 'none',
-    margin: '10px',
-    backgroundColor: 'transparent',
-    padding: '0',
-    margin: '0'
-  },
-  submit: {
-    height: '70%',
-    width: '20%',
-    border: '0',
-    outline: '0',
-    cursor: 'pointer'
-  },
-  form: {
-    width: '100%',
-    height: '100%'
+let container = css({
+  backgroundColor: '#009688',
+  color: '#FFFFFF',
+  height: '80px',
+  width: '100%',
+  padding: '5%'
+})
+let textbox = css({
+  width: '77.5%',
+  padding: '5px',
+  marginRight: '2.5%'
+})
+let button = css ({
+  transition: 'all 250ms ease',
+  boxSizing: 'border-box',
+  width: '20%',
+  padding: '5px',
+  border: 'none',
+  border: '2px solid white',
+  borderRadius: '5px',
+  backgroundColor: 'transparent',
+  color: 'white',
+  cursor: 'pointer',
+  ':hover': {
+    backgroundColor: '#FFFFFF',
+    border: '2px solid #009688',
+    color: '#009688'
   }
-}
+})
 
 const CreatePost = ({ onChange, onSubmit, newPost }) =>
 
-  <div style={styles.create}>
-    <form onSubmit={onSubmit} style={styles.form}>
-      <input type="textarea" rows="2" placeholder="Create a post" style={styles.text} onChange={onChange} value={newPost} />
-      <input type="submit" value="Go" style={styles.submit} />
+  <div {...container}>
+
+    <form onSubmit={onSubmit}>
+      <input {...textbox} type="textarea" rows="2" placeholder="Create a post" onChange={onChange} value={newPost} />
+      <input {...button} type="submit" value="Go" />
     </form>
 
   </div>

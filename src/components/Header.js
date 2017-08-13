@@ -1,22 +1,21 @@
 import React from 'react';
+import { css } from 'glamor';
 
-const styles = {
-  header: {
-    height: '60px',
-    width: '100%',
-    backgroundColor: 'grey',
-    textAlign: 'center',
+let header = css({
+  transition: 'all 250ms ease',
+  backgroundColor: '#009688',
+  color: '#FFFFFF',
+  height: '60px',
+  width: '100%',
+  textAlign: 'center',
+  ':hover': {
+    color: 'pink'
   },
-  h1: {
-    fontSize: '26px',
-    color: 'white',
-    fontWeight: '300',
-    cursor: 'pointer'
-  }
-}
+})
+
 const Header = ({ updateFeed }) =>
-  <div style={styles.header}>
-    <h1 style={styles.h1} onClick={updateFeed}>YakBak</h1>
+  <div {...header}>
+    <h1 onClick={updateFeed}>YakBak</h1>
   </div>
 
 export default Header;

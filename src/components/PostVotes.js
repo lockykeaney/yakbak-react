@@ -1,30 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { css } from 'glamor';
 
-const styles = {
-  container: {
-    height: '80px',
-    width: '10%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-  },
-  votes: {
-    height: '40px',
-  },
-  arrow: {
-    height: '20px',
-    width: '60%',
-    margin: '0 auto',
-    border: '1px solid grey'
-  }
-}
+let voteStyle = css({
+  width: '20%',
+  textAlign: 'center',
+  fontSize: '28px',
+  color: 'white'
+})
+
 const PostVotes = ({ votes }) =>
 
-    <div style={styles.container}>
-      <div style={styles.arrow}></div>
+    <div {...voteStyle}>
+      <div></div>
       {votes}
-      <div style={styles.arrow}></div>
+      <div></div>
     </div>
 
 export default PostVotes;
