@@ -1,27 +1,35 @@
-export const postsHasErrored = (bool) => {
+export function postsHasErrored(bool) {
     return {
         type: 'POSTS_HAS_ERRORED',
         hasErrored: bool
     };
 }
 
-export const postsIsLoading = (bool) => {
+export function postsIsLoading(bool) {
     return {
         type: 'POSTS_IS_LOADING',
         isLoading: bool
     };
 }
 
-export const getAllPostsSuccess = ( posts ) => {
+export function getAllPostsSuccess(posts) {
   return {
     type: 'GET_ALL_POSTS_SUCCESS',
     posts
   }
 }
-const url = 'http://localhost:2000/posts';
 
-export const getAllPosts = ( url ) => {
+export function errorAfterFiveSeconds() {
+    return (dispatch) => {
+        setTimeout(() => {
+            dispatch(postsHasErrored(true));
+        }, 5000);
+    };
+}
+
+export function getAllPosts(url) {
   return (dispatch) => {
+    dispatch(postsIsLoading(true))
     fetch(url)
       .then((response) => {
         if (!response.ok) {
@@ -31,7 +39,7 @@ export const getAllPosts = ( url ) => {
         return response;
       })
       .then((response) => response.json())
-      .then((data) => dispatch(getAllPostsSuccess(data)))
+      .then((posts) => dispatch(getAllPostsSuccess(posts)))
       .catch(() => dispatch(postsHasErrored(true)))
     }
   }
