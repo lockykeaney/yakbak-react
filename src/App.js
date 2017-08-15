@@ -18,9 +18,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.allPosts('http://localhost:2000/posts')
-    console.log(this.props);
   }
-
 
   // draftPost(event) {
   //   const newPost = event.target.value;
@@ -73,38 +71,34 @@ class App extends Component {
   // }
 
   render() {
-     return (
-       <div>
-         <p>hey</p>
-       </div>
-     )
-  //   const { posts, newPost, newComment } = this.state;
-  //
-  //   let sorted = posts.sort((a, b) => {
-  //     return new Date(a.postedOn).getTime() - new Date(b.postedOn).getTime()
-  //   }).reverse();
-  //
-  //   if (this.props.hasErrored) {
-  //     return <p>Sorry! There was an error loading the items</p>;
-  //   }
-  //   if (this.props.isLoading) {
-  //     return <p>Loading…</p>;
-  //   }
-  //
-  //   return (
-  //     <div {...appStyle}>
-  //       <Header updateFeed={this.updateFeed} />
-  //       <CreatePost onChange={this.draftPost} onSubmit={this.submitPost} newPost={newPost} />
-  //       <div>
-  //         {sorted.map((post) => {
-  //     			return (
-  //     				<PostWrap key={post._id} post={post} onChange={this.draftComment} onSubmit={this.submitComment} upvote={this.upvotePost} />
-  //     			)
-  //     		})}
-  //
-  //       </div>
-  //     </div>
-  //   );
+
+    const { posts, newPost, newComment } = this.props;
+
+    let sorted = posts.sort((a, b) => {
+      return new Date(a.postedOn).getTime() - new Date(b.postedOn).getTime()
+    }).reverse();
+
+    if (this.props.hasErrored) {
+      return <p>Sorry! There was an error loading the items</p>;
+    }
+    if (this.props.isLoading) {
+      return <p>Loading…</p>;
+    }
+
+    return (
+      <div {...appStyle}>
+        <Header updateFeed={this.updateFeed} />
+        <CreatePost onChange={this.draftPost} onSubmit={this.submitPost} newPost={newPost} />
+        <div>
+          {sorted.map((post) => {
+      			return (
+      				<PostWrap key={post._id} post={post} onChange={this.draftComment} onSubmit={this.submitComment} upvote={this.upvotePost} />
+      			)
+      		})}
+
+        </div>
+      </div>
+    );
   }
 }
 
