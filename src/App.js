@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PostWrap from './components/PostWrap';
 import CreatePost from './components/CreatePost';
 import Header from './components/Header';
 import { characterCountdown, checkIfEmpty } from './helperFunctions';
 import { css } from 'glamor';
+import { getAllPosts } from './actions';
 
 let appStyle = css({
   height: 'auto',
@@ -26,7 +28,10 @@ class App extends Component {
     this.updateFeed = this.updateFeed.bind(this);
     this.draftComment = this.draftComment.bind(this);
     this.submitComment = this.submitComment.bind(this);
+    this.upvotePost = this.upvotePost.bind(this);
 	}
+
+
 
   getAllPosts() {
     fetch('http://localhost:2000/posts')
@@ -59,6 +64,14 @@ class App extends Component {
       .then( this.getAllPosts.bind(this) )
       .then( () => this.setState({ newPost: '' }) )
     }
+  }
+
+  upvotePost(event) {
+    event.preventDefault();
+    console.log(event.target);
+  }
+  downvotePost() {
+
   }
 
   draftComment(event) {
@@ -123,6 +136,7 @@ class App extends Component {
                 post={post}
                 onChange={this.draftComment}
                 onSubmit={this.submitComment}
+                upvote={this.upvotePost}
               />
       			)
       		})}
@@ -133,4 +147,18 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ( state ) => {
+  return {
+    posts: state.posts,
+    hasErrored: state.postsHasErrored,
+    isLoading: state.postsIsLoading
+  }
+}
+
+const mapDispatchToProps = ( dispatch ) => {
+  return {
+    fetchData: ( url ) => dispatch(getAllPosts(url))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

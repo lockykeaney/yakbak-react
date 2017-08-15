@@ -18,7 +18,7 @@ const PostWrap = (props) =>
 
       <div {...wrap}>
         <PostContent content={props.post.content} />
-        <PostVotes votes={props.post.votes} />
+        <PostVotes votes={props.post.votes} upvote={props.upvote} />
 
         {props.post.comments.map((comment) => {
           return(

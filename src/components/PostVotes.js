@@ -5,7 +5,7 @@ import { Icon } from 'react-fa';
 let voteStyle = css({
   width: '20%',
   textAlign: 'center',
-  fontSize: '28px',
+  fontSize: '25px',
   color: 'white',
   display: 'flex',
   alignItems: 'center',
@@ -20,13 +20,13 @@ let arrow = css({
 })
 
 
-const PostVotes = ({ votes }) =>
+const PostVotes = ({ votes, upvote }) =>
 
     <div {...voteStyle}>
       <Icon
         {...arrow}
         name='arrow-up'
-        size='1x'
+        onClick={upvote}
       />
       {votes}
       <Icon
