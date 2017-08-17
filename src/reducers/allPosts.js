@@ -1,4 +1,4 @@
-export function postsHasErrored( state = false, action){
+export const postsHasErrored = ( state = false, action) => {
   switch( action.type ) {
     case 'POSTS_HAS_ERRORED':
       return action.hasErrored;
@@ -8,7 +8,7 @@ export function postsHasErrored( state = false, action){
   }
 }
 
-export function postsIsLoading( state = false, action){
+export const postsIsLoading = ( state = false, action) => {
   switch( action.type ) {
     case 'POSTS_IS_LOADING':
       return action.isLoading;
@@ -18,7 +18,7 @@ export function postsIsLoading( state = false, action){
   }
 }
 
-export function posts( state = [], action ){
+export const posts = ( state = [], action ) => {
   switch( action.type ) {
     case 'GET_ALL_POSTS_SUCCESS':
      return action.posts;

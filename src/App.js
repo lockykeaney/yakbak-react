@@ -5,7 +5,8 @@ import CreatePost from './components/CreatePost';
 import Header from './components/Header';
 import { characterCountdown, checkIfEmpty } from './helperFunctions';
 import { css } from 'glamor';
-import { getAllPosts } from './actions';
+import { getAllPosts } from './actions/allPostsActions';
+import { submitPost } from './actions/createPostActions';
 
 let appStyle = css({
   height: 'auto',
@@ -14,10 +15,15 @@ let appStyle = css({
   backgroundColor: 'white'
 })
 
+let apiUrl = 'http://localhost:2000/';
+if(process.env.REACT_APP_ENV === 'production') {
+	apiUrl = process.env.REACT_APP_PRODUCTIONAPI;
+}
+
 class App extends Component {
 
   componentDidMount() {
-    this.props.allPosts('http://localhost:2000/posts')
+    this.props.allPosts(apiUrl+'posts')
   }
 
   // draftPost(event) {
@@ -112,7 +118,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    allPosts: (url) => dispatch(getAllPosts(url))
+    allPosts: (url) => dispatch(getAllPosts(url)),
+    createPost: (url, text) => dispatch(submitPost(url, text))
   }
 }
 
